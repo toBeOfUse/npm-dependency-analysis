@@ -76,10 +76,15 @@ if __name__ == "__main__":
     print(f"TOTAL FILES: {total_files}")
 
     with open(target.parent.name+".csv", "w+", encoding="utf-8") as csv_out:
-        csv_out.write("module name,lines,files\n")
-        for meta in metas:
-            csv_out.write(f"{meta.module_name},{meta.lines},{meta.files}\n")
-        csv_out.write(f"TOTAL,{total_lines},{total_files}\n")
+        with open(target.parent.name+".md", "w+", encoding="utf-8") as md_out:
+            csv_out.write("module name,lines,files\n")
+            md_out.write("|module name|lines|files|\n")
+            md_out.write("|---|---|---|\n")
+            for meta in metas:
+                csv_out.write(f"{meta.module_name},{meta.lines},{meta.files}\n")
+                md_out.write(f"|{meta.module_name}|{meta.lines}|{meta.files}|\n")
+            csv_out.write(f"TOTAL,{total_lines},{total_files}\n")
+            md_out.write(f"|TOTAL|{total_lines}|{total_files}|\n")
     
     with open(target.parent.name+"_log_lines.csv", "w+", encoding="utf-8") as csv_out:
         csv_out.write("lines of js,modules with that many lines of js\n")
