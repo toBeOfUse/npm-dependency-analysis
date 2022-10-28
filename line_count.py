@@ -20,6 +20,8 @@ class ModuleMeta:
                 with open(file, encoding="utf-8") as opened_file:
                     contents = opened_file.read()
                     lines += max(contents.count("\n"), contents.count(";"))
+                    if not contents.endswith("\n"):
+                        lines += 1
                 files += 1
         self.lines, self.files = lines, files
         self.path = path
