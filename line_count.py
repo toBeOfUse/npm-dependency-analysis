@@ -39,7 +39,7 @@ class ModuleMeta:
 def get_module_directories(path: Path) -> list[Path]:
     useful_dir = lambda x: x.is_dir() and x.name[0] != "."
     dirs = list(filter(useful_dir, path.iterdir()))
-    for at_dir in filter(lambda x: x.name.startswith("@"), dirs):
+    for at_dir in list(filter(lambda x: x.name.startswith("@"), dirs)):
         subdirs = list(filter(useful_dir, at_dir.iterdir()))
         dirs.remove(at_dir)
         dirs = subdirs + dirs
